@@ -37,7 +37,9 @@ class Supplier(models.Model):
     level = models.IntegerField(choices=LEVEL_CHOICES, default=FACTORY)
     contact = models.OneToOneField(Contact, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
-    supplier = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    supplier = models.ForeignKey('self', on_delete=models.SET_NULL,
+                                 null=True, blank=True,
+                                 related_name='children')
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
